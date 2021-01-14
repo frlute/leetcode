@@ -13,7 +13,7 @@
  * }
  */
 func hasCycle(head *ListNode) bool {
-    if head == nil || head.Next == nil {
+	if head == nil || head.Next == nil {
 		return false
 	}
 	// 哈希法
@@ -29,14 +29,16 @@ func hasCycle(head *ListNode) bool {
 
 	// 快慢指针
 	fast := head.Next
-	for fast != nil && head.Next != nil && fast.Next != nil {
+	for fast != nil && fast.Next != nil {
+		head = head.Next
+		fast = fast.Next.Next
+
 		if head == fast {
 			return true
 		}
-		head = head.Next
-		fast = fast.Next.Next
 	}
 	return false
 }
+
 // @lc code=end
 
