@@ -28,7 +28,7 @@ func minWindow(s string, t string) string {
 		right++
 
 		// 进行窗口内数据的一系列更新
-		if _, ok := needs[c]; ok {
+		if needs[c] > 0 {
 			windows[c]++
 			if windows[c] == needs[c] {
 				// 字符 c 的出现次数符合要求了
@@ -50,7 +50,7 @@ func minWindow(s string, t string) string {
 			left++
 
 			// 进行窗口内数据的一系列更新
-			if _, ok := needs[d]; ok {
+			if needs[d] > 0 {
 				// 移出 windows
 				windows[d]--
 				if windows[d] < needs[d] {
