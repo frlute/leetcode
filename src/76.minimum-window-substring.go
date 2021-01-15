@@ -51,12 +51,12 @@ func minWindow(s string, t string) string {
 
 			// 进行窗口内数据的一系列更新
 			if needs[d] > 0 {
-				// 移出 windows
-				windows[d]--
-				if windows[d] < needs[d] {
+				if windows[d] == needs[d] {
 					// 字符 d 出现次数不再符合要求了
 					match--
 				}
+				// 移出 windows
+				windows[d]--
 			}
 		}
 

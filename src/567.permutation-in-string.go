@@ -6,19 +6,19 @@
 
 // @lc code=start
 func checkInclusion(s1 string, s2 string) bool {
-	if len(s2) > len(s1) {
+	if len(s1) > len(s2) {
 		return false
 	}
-	needs := make(map[byte]int, len(s2))
-	for _, value := range []byte(s2) {
+	needs := make(map[byte]int, 26)
+	for _, value := range []byte(s1) {
 		needs[value]++
 	}
-	windows := make(map[byte]int, len(s1))
+	windows := make(map[byte]int, 26)
 
 	left, right := 0, 0
 	match := 0
-	for right < len(s1) {
-		addStr := s1[right]
+	for right < len(s2) {
+		addStr := s2[right]
 		right++
 
 		if needs[addStr] > 0 {
@@ -29,19 +29,23 @@ func checkInclusion(s1 string, s2 string) bool {
 		}
 
 		// 收缩条件
-		for right-left >= len(s2) {
+		for right-left >= len(s1) {
 			// 在这里判断是否找到了合法的子串
 			if match == len(needs) {
 				return true
 			}
-			delStr := s1[left]
-			left--
+			delStr := s2[left]
+			left++
 
 			if needs[delStr] > 0 {
-				windows[delStr]--
-				if windows[delStr] < needs[delStr] {
+				// windows[delStr]--
+				// if windows[delStr] < needs[delStr] {
+				// 	match--
+				// }
+				if windows[delStr] == needs[delStr] {
 					match--
 				}
+				windows[delStr]--
 			}
 		}
 	}
