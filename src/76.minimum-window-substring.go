@@ -28,7 +28,7 @@ func minWindow(s string, t string) string {
 		right++
 
 		// 进行窗口内数据的一系列更新
-		if needs[c] > 0 {
+		if _, ok := needs[c]; ok {
 			windows[c]++
 			if windows[c] == needs[c] {
 				// 字符 c 的出现次数符合要求了
@@ -37,7 +37,7 @@ func minWindow(s string, t string) string {
 		}
 
 		// 判断左侧窗口是否要收缩
-		if len(needs) == match {
+		for match == len(needs) {
 			// 在这里更新最小覆盖子串
 			if right-left < minLen {
 				// 更新最小子串的位置和长度
@@ -46,24 +46,24 @@ func minWindow(s string, t string) string {
 			}
 			// d 是将移出窗口的字符
 			d := s[left]
+			// 左移窗口
+			left++
+
 			// 进行窗口内数据的一系列更新
-			if needs[d] > 0 {
-				// 移出 window
+			if _, ok := needs[d]; ok {
+				// 移出 windows
 				windows[d]--
 				if windows[d] < needs[d] {
-					// 字符 c2 出现次数不再符合要求
+					// 字符 d 出现次数不再符合要求了
 					match--
 				}
 			}
-			// 左移窗口
-			left++
 		}
-	}
 
+	}
 	if minLen == math.MaxInt32 {
 		return ""
 	}
-	fmt.Println("-----", s, t, start, minLen, right)
 	return s[start : start+minLen]
 }
 
