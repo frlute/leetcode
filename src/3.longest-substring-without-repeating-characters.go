@@ -6,6 +6,7 @@
 
 // @lc code=start
 func lengthOfLongestSubstring(s string) int {
+	windows := make(map[byte]int)
 	left, right := 0, 0
 	// 返回子字符串开始的索引
 	res := 0
