@@ -29,7 +29,7 @@ func findAnagrams(s string, p string) []int {
 		// 收缩条件
 		for right-left >= len(p) {
 			// 在这里判断是否找到了合法的子串
-			if match == len(p) {
+			if match == len(needs) {
 				res = append(res, left)
 			}
 			str2 := s[left]
